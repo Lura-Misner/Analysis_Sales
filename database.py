@@ -1,0 +1,139 @@
+import openpyxl
+import mysql.connector
+from mysql.connector import Error
+
+try:
+    # Establish a connection to the MySQL server
+    connection = mysql.connector.connect(
+        host="localhost",
+        user="root",  # e.g., "root"
+        password="password",
+        database = "StoreAnalysis"
+    )
+
+    if connection.is_connected():
+        cursor = connection.cursor()
+
+        # Create The Database
+        cursor.execute("CREATE DATABASE IF NOT EXISTS StoreAnalysis")
+        print("Database created or verified successfully.")
+
+        # Create Our Staging Tables
+        orders_staging_query = """CREATE TABLE IF NOT EXISTS Staging(
+            row_id INT PRIMARY KEY,
+            order_id VARCHAR(50),
+            order_date DATE,
+            ship_date DATE,
+            ship_mode VARCHAR(50),
+            customer_id VARCHAR(50),
+            customer_name VARCHAR(100),
+            segment VARCHAR(50),
+            country_region VARCHAR(100),
+            city VARCHAR(100),
+            state_province VARCHAR(100),
+            postal_code VARCHAR(50),
+            region VARCHAR(50),
+            product_id VARCHAR(50),
+            category VARCHAR(50),
+            sub_category VARCHAR(50),
+            product_name VARCHAR(255),
+            sales DECIMAL(12, 4),
+            quantity INT,
+            discount DECIMAL(12, 4),
+            profit DECIMAL(12, 4)
+        );"""
+
+        manager_staging_query = """CREATE TABLE IF NOT EXISTS ManagerStaging(
+                    region VARCHAR(50) PRIMARY KEY,
+                    regional_manager VARCHAR(100)
+                );"""
+
+        returns_staging_query = """CREATE TABLE IF NOT EXISTS ReturnsStaging(
+                    order_id VARCHAR(50) PRIMARY KEY,
+                    returned VARCHAR(10)  
+        );"""
+
+
+        # Try to create staging tables, handle errors.
+        try:
+            cursor.execute(orders_staging_query)
+            cursor.execute(manager_staging_query)
+            cursor.execute(returns_staging_query)
+            print("Staging Tables created or verified successfully.")
+
+
+            # Establish connection to data file
+            workbook = openpyxl.load_workbook("sample_-_superstore.xlsx")
+            orders_sheet = workbook["Orders"]
+            people_sheet = workbook["People"]
+            returns_sheet = workbook["Returns"]
+
+            # Set up query for inserting rows
+            orders_query = """ INSERT INTO Staging(
+                row_id, order_id, order_date, ship_date, ship_mode,
+                customer_id, customer_name, segment, country_region,
+                city, state_province, postal_code, region, product_id,
+                category, sub_category, product_name, sales, quantity,
+                discount, profit)
+                VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s,
+                    %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
+                """
+
+            people_query = "INSERT INTO ManagerStaging (region, regional_manager) VALUES (%s, %s)"
+
+            returns_query = "INSERT INTO ReturnsStaging (order_id, returned) VALUES (%s, %s)"
+
+
+            # Iterate through Order sheet, and gather rows for table
+            orders_list = []
+            for row in orders_sheet.iter_rows(min_row=2, values_only=True):
+                # Date objects need to be converted to proper format
+                values = list(row)
+
+                values[2] = values[2].date()
+                values[3]= values[3].date()
+
+                orders_list.append(tuple(values))
+
+            # Iterate through People Sheet, and gather rows for table
+            people_list = []
+            for row in people_sheet.iter_rows(min_row=2, values_only=True):
+                # Columns are given in reverse order, so we must switch them
+                values = list(row)
+                values[0], values[1] = values[1], values[0]
+                people_list.append(tuple(values))
+
+            # Iterate through returns sheet, and gather rows for table
+            returns_list = []
+            for row in returns_sheet.iter_rows(min_row=2, values_only=True):
+                returns_list.append(row)
+
+            # Add rows to table
+            cursor.executemany(orders_query, orders_list)
+            orders_count = cursor.rowcount
+
+            cursor.executemany(people_query, people_list)
+            people_count = cursor.rowcount
+
+            cursor.executemany(returns_query, returns_list)
+            returns_count = cursor.rowcount
+
+            connection.commit()
+
+            print(f"Orders Table: {orders_count} rows added."
+                  f"Manager Table: {people_count} rows added."
+                  f"Returns Table: {returns_count} rows added.")
+
+
+        except Error as e:
+            print(f"Error creating staging table: {e}")
+
+
+except Error as e:
+    print(f"Error connecting to MySQL: {e}")
+
+finally:
+    # Close the Connection
+    if 'connection' in locals() and connection.is_connected():
+        cursor.close()
+        connection.close()
