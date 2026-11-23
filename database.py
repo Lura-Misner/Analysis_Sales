@@ -6,7 +6,7 @@ try:
     # Establish a connection to the MySQL server
     connection = mysql.connector.connect(
         host="localhost",
-        user="root",  # e.g., "root"
+        user="root",  
         password="password",
         database = "StoreAnalysis"
     )
