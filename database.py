@@ -29,8 +29,15 @@ try:
 
             print("Staging Tables created or verified successfully.")
 
+            # Clear All Tables
+            with open("sql/clear_normalized_tables.sql", "r") as file:
+                clear_normal = file.read()
 
-            # Clear tables
+            for statement in clear_normal.split(";"):
+                if statement.strip():
+                    cursor.execute(statement)
+
+
             with open("sql/clear_staging.sql", "r") as file:
                 clear_staging = file.read()
 
@@ -38,8 +45,7 @@ try:
                 if statement.strip():
                     cursor.execute(statement)
 
-            print("Staging Tables cleared successfully.")
-
+            print("Normalized and Staging Tables cleared successfully.")
 
             # Establish connection to data file
             workbook = openpyxl.load_workbook("sample_-_superstore.xlsx")
@@ -103,7 +109,7 @@ try:
                   f"ManagerStaging Table: {people_count} rows added. "
                   f"ReturnsStaging Table: {returns_count} rows added.")
 
-            # Now we will create the actual tables for our database.
+            # Create normalized tables for our database.
             with open("sql/create_tables.sql", "r") as file:
                 create_tables = file.read()
 
@@ -113,15 +119,20 @@ try:
 
             print("Normalized Tables created or verified successfully.")
 
-            # TODO: Populate actual tables
+            # Populate Normalized Tables
+            with open("sql/populate_tables.sql", "r") as file:
+                populate_tables = file.read()
 
+            for statement in populate_tables.split(";"):
+                if statement.strip():
+                    cursor.execute(statement)
 
-
-
+            connection.commit()
+            print("Normalized Tables Populated successfully.")
 
 
         except Error as e:
-            print(f"Error creating or populating staging table: {e}")
+            print(f"Error creating or populating staging or normalized table: {e}")
 
 
 except Error as e:

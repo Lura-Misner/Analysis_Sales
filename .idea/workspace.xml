@@ -4,15 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0459a6dd-cbf0-4ccd-91ff-e3590c3f83db" name="Changes" comment="Database Initialized, Staging tables populated.">
-      <change afterPath="$PROJECT_DIR$/sql/clear_staging.sql" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/sql/create_staging.sql" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/sql/create_tables.sql" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/sql/validate_data.sql" afterDir="false" />
+    <list default="true" id="0459a6dd-cbf0-4ccd-91ff-e3590c3f83db" name="Changes" comment="Separated sql table statements into own documents, included data validation, and created the new normalized tables.">
+      <change afterPath="$PROJECT_DIR$/sql/clear_normalized_tables.sql" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sql/populate_tables.sql" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Schema.png" beforeDir="false" afterPath="$PROJECT_DIR$/Schema.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/database.py" beforeDir="false" afterPath="$PROJECT_DIR$/database.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/sample_-_superstore(Orders).csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/sql/validate_data.sql" beforeDir="false" afterPath="$PROJECT_DIR$/sql/validate_data.sql" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -134,7 +132,15 @@
       <option name="project" value="LOCAL" />
       <updated>1795469011408</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="Separated sql table statements into own documents, included data validation, and created the new normalized tables.">
+      <option name="closed" value="true" />
+      <created>1795549671946</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1795549671946</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -151,6 +157,7 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Initial" />
     <MESSAGE value="Database Initialized, Staging tables populated." />
-    <option name="LAST_COMMIT_MESSAGE" value="Database Initialized, Staging tables populated." />
+    <MESSAGE value="Separated sql table statements into own documents, included data validation, and created the new normalized tables." />
+    <option name="LAST_COMMIT_MESSAGE" value="Separated sql table statements into own documents, included data validation, and created the new normalized tables." />
   </component>
 </project>

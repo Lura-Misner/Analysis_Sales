@@ -82,3 +82,49 @@ LEFT JOIN Staging s
 WHERE s.order_id IS NULL;
 -- Returns 0 rows, every order that has been returned exists in our Staging table
 
+------------------ Database Validation after Normalization -----------------------------------
+-- Check that every order has at least one order item
+SELECT o.order_id
+FROM Orders o
+LEFT JOIN OrderItems i
+ON o.order_id = i.order_id
+GROUP BY o.order_id
+HAVING COUNT(product_key) < 1;
+-- Returned 0 rows
+
+-- Check that there are no records in OrderItems that reference an Order that doesn't exist
+SELECT o.order_id
+FROM OrderItems o
+LEFT JOIN Orders i
+ON o.order_id = i.order_id
+WHERE i.order_id is NULL;
+-- Returned 0 rows
+
+-- Check that every order item references a product that exists
+SELECT o.row_id
+FROM OrderItems o
+LEFT JOIN Products p
+ON o.product_key = p.product_key
+WHERE p.product_key is NULL;
+-- Returned 0 rows, all products referenced exist in our product table.
+
+-- Validate that our numeric data didn't get corrupted between tables
+SELECT
+    SUM(sales),
+    SUM(profit),
+    SUM(quantity)
+FROM Staging;
+
+SELECT
+    SUM(sales),
+    SUM(profit),
+    SUM(quantity)
+FROM orderitems;
+-- These return the same results, so that is fine.
+
+-- Check that no duplicate products made it into our Product table
+SELECT product_id, product_name
+FROM Products
+GROUP BY product_id, product_name
+HAVING COUNT(*) > 1;
+-- Returns 0, duplicate free.
