@@ -6,7 +6,7 @@ try:
     # Establish a connection to the MySQL server
     connection = mysql.connector.connect(
         host="localhost",
-        user="root",  # e.g., "root"
+        user="root",
         password="password",
         database = "StoreAnalysis"
     )
@@ -18,48 +18,27 @@ try:
         cursor.execute("CREATE DATABASE IF NOT EXISTS StoreAnalysis")
         print("Database created or verified successfully.")
 
-        # Create Our Staging Tables
-        orders_staging_query = """CREATE TABLE IF NOT EXISTS Staging(
-            row_id INT PRIMARY KEY,
-            order_id VARCHAR(50),
-            order_date DATE,
-            ship_date DATE,
-            ship_mode VARCHAR(50),
-            customer_id VARCHAR(50),
-            customer_name VARCHAR(100),
-            segment VARCHAR(50),
-            country_region VARCHAR(100),
-            city VARCHAR(100),
-            state_province VARCHAR(100),
-            postal_code VARCHAR(50),
-            region VARCHAR(50),
-            product_id VARCHAR(50),
-            category VARCHAR(50),
-            sub_category VARCHAR(50),
-            product_name VARCHAR(255),
-            sales DECIMAL(12, 4),
-            quantity INT,
-            discount DECIMAL(12, 4),
-            profit DECIMAL(12, 4)
-        );"""
-
-        manager_staging_query = """CREATE TABLE IF NOT EXISTS ManagerStaging(
-                    region VARCHAR(50) PRIMARY KEY,
-                    regional_manager VARCHAR(100)
-                );"""
-
-        returns_staging_query = """CREATE TABLE IF NOT EXISTS ReturnsStaging(
-                    order_id VARCHAR(50) PRIMARY KEY,
-                    returned VARCHAR(10)  
-        );"""
-
-
-        # Try to create staging tables, handle errors.
         try:
-            cursor.execute(orders_staging_query)
-            cursor.execute(manager_staging_query)
-            cursor.execute(returns_staging_query)
+            # Try to create staging tables, handle errors.
+            with open("sql/create_staging.sql", "r") as file:
+                create_staging = file.read()
+
+            for statement in create_staging.split(";"):
+                if statement.strip():
+                    cursor.execute(statement)
+
             print("Staging Tables created or verified successfully.")
+
+
+            # Clear tables
+            with open("sql/clear_staging.sql", "r") as file:
+                clear_staging = file.read()
+
+            for statement in clear_staging.split(";"):
+                if statement.strip():
+                    cursor.execute(statement)
+
+            print("Staging Tables cleared successfully.")
 
 
             # Establish connection to data file
@@ -120,13 +99,29 @@ try:
 
             connection.commit()
 
-            print(f"Orders Table: {orders_count} rows added."
-                  f"Manager Table: {people_count} rows added."
-                  f"Returns Table: {returns_count} rows added.")
+            print(f"Staging Table: {orders_count} rows added. "
+                  f"ManagerStaging Table: {people_count} rows added. "
+                  f"ReturnsStaging Table: {returns_count} rows added.")
+
+            # Now we will create the actual tables for our database.
+            with open("sql/create_tables.sql", "r") as file:
+                create_tables = file.read()
+
+            for statement in create_tables .split(";"):
+                if statement.strip():
+                    cursor.execute(statement)
+
+            print("Normalized Tables created or verified successfully.")
+
+            # TODO: Populate actual tables
+
+
+
+
 
 
         except Error as e:
-            print(f"Error creating staging table: {e}")
+            print(f"Error creating or populating staging table: {e}")
 
 
 except Error as e:

@@ -1,0 +1,3 @@
+TRUNCATE TABLE Staging;
+TRUNCATE TABLE ManagerStaging;
+TRUNCATE TABLE ReturnsStaging;
