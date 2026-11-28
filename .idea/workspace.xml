@@ -4,48 +4,38 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0459a6dd-cbf0-4ccd-91ff-e3590c3f83db" name="Changes" comment="Separated sql table statements into own documents, included data validation, and created the new normalized tables.">
-      <change afterPath="$PROJECT_DIR$/sql/analysis.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/Analyze.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Analyze.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    <list default="true" id="bfb90ed7-0f7b-49ad-b1d3-7896c2b16f7f" name="Changes" comment="Used pandas to explore the relationships with regional shipping and customer spending. Exported the datasets into new csvs to use later. Also organized files into folders">
+      <change afterPath="$PROJECT_DIR$/Python/config_example.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="FileTemplateManagerImpl">
-    <option name="RECENT_TEMPLATES">
-      <list>
-        <option value="Python Script" />
-      </list>
-    </option>
-  </component>
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="prepare-data" />
+        <entry key="$PROJECT_DIR$" value="main" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
-    <option name="RESET_MODE" value="SOFT" />
   </component>
-  <component name="GitHubPullRequestSearchHistory">{
-  &quot;lastFilter&quot;: {
-    &quot;state&quot;: &quot;OPEN&quot;,
-    &quot;assignee&quot;: &quot;Lura-Misner&quot;
+  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
+  "lastFilter": {
+    "state": "OPEN",
+    "assignee": "Lura-Misner"
   }
-}</component>
-  <component name="GithubPullRequestsUISettings">{
-  &quot;selectedUrlAndAccountId&quot;: {
-    &quot;url&quot;: &quot;https://github.com/Lura-Misner/Analysis_Sales.git&quot;,
-    &quot;accountId&quot;: &quot;16dd9194-e203-4fe7-af5c-dc7a6efc46d1&quot;
+}]]></component>
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "https://github.com/Lura-Misner/Analysis_Sales.git",
+    "accountId": "16dd9194-e203-4fe7-af5c-dc7a6efc46d1"
   }
-}</component>
-  <component name="ProjectColorInfo">{
-  &quot;associatedIndex&quot;: 0
-}</component>
-  <component name="ProjectId" id="3MOSHDCD8JgQxTVt2EC25qGSRMH" />
+}]]></component>
+  <component name="ProjectColorInfo"><![CDATA[{
+  "associatedIndex": 4
+}]]></component>
+  <component name="ProjectId" id="3MiEL1lPmR8FNC7zqAcVNEwPD0J" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -53,18 +43,11 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
-    "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "Python.database.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.git.unshallow": "true",
     "git-widget-placeholder": "analyze__data"
   }
 }]]></component>
-  <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\misne\OneDrive\Desktop\Doc\Coding_Projects\Analyze\sql" />
-    </key>
-  </component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
@@ -75,86 +58,16 @@
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="0459a6dd-cbf0-4ccd-91ff-e3590c3f83db" name="Changes" comment="" />
-      <created>1795220030548</created>
+      <changelist id="bfb90ed7-0f7b-49ad-b1d3-7896c2b16f7f" name="Changes" comment="Used pandas to explore the relationships with regional shipping and customer spending. Exported the datasets into new csvs to use later. Also organized files into folders" />
+      <created>1795824928342</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1795220030548</updated>
+      <updated>1795824928342</updated>
     </task>
-    <task id="LOCAL-00001" summary="Initial">
-      <option name="closed" value="true" />
-      <created>1795220368298</created>
-      <option name="number" value="00001" />
-      <option name="presentableId" value="LOCAL-00001" />
-      <option name="project" value="LOCAL" />
-      <updated>1795220368298</updated>
-    </task>
-    <task id="LOCAL-00002" summary="Initial">
-      <option name="closed" value="true" />
-      <created>1795220379450</created>
-      <option name="number" value="00002" />
-      <option name="presentableId" value="LOCAL-00002" />
-      <option name="project" value="LOCAL" />
-      <updated>1795220379450</updated>
-    </task>
-    <task id="LOCAL-00003" summary="Initial">
-      <option name="closed" value="true" />
-      <created>1795220449840</created>
-      <option name="number" value="00003" />
-      <option name="presentableId" value="LOCAL-00003" />
-      <option name="project" value="LOCAL" />
-      <updated>1795220449840</updated>
-    </task>
-    <task id="LOCAL-00004" summary="Database Initialized, Staging tables populated.">
-      <option name="closed" value="true" />
-      <created>1795468596009</created>
-      <option name="number" value="00004" />
-      <option name="presentableId" value="LOCAL-00004" />
-      <option name="project" value="LOCAL" />
-      <updated>1795468596009</updated>
-    </task>
-    <task id="LOCAL-00005" summary="Database Initialized, Staging tables populated.">
-      <option name="closed" value="true" />
-      <created>1795468624208</created>
-      <option name="number" value="00005" />
-      <option name="presentableId" value="LOCAL-00005" />
-      <option name="project" value="LOCAL" />
-      <updated>1795468624208</updated>
-    </task>
-    <task id="LOCAL-00006" summary="Database Initialized, Staging tables populated.">
-      <option name="closed" value="true" />
-      <created>1795469011408</created>
-      <option name="number" value="00006" />
-      <option name="presentableId" value="LOCAL-00006" />
-      <option name="project" value="LOCAL" />
-      <updated>1795469011408</updated>
-    </task>
-    <task id="LOCAL-00007" summary="Separated sql table statements into own documents, included data validation, and created the new normalized tables.">
-      <option name="closed" value="true" />
-      <created>1795549671946</created>
-      <option name="number" value="00007" />
-      <option name="presentableId" value="LOCAL-00007" />
-      <option name="project" value="LOCAL" />
-      <updated>1795549671946</updated>
-    </task>
-    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
-  <component name="Vcs.Log.Tabs.Properties">
-    <option name="TAB_STATES">
-      <map>
-        <entry key="MAIN">
-          <value>
-            <State />
-          </value>
-        </entry>
-      </map>
-    </option>
-  </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Initial" />
-    <MESSAGE value="Database Initialized, Staging tables populated." />
-    <MESSAGE value="Separated sql table statements into own documents, included data validation, and created the new normalized tables." />
-    <option name="LAST_COMMIT_MESSAGE" value="Separated sql table statements into own documents, included data validation, and created the new normalized tables." />
+    <MESSAGE value="Used pandas to explore the relationships with regional shipping and customer spending. Exported the datasets into new csvs to use later. Also organized files into folders" />
+    <option name="LAST_COMMIT_MESSAGE" value="Used pandas to explore the relationships with regional shipping and customer spending. Exported the datasets into new csvs to use later. Also organized files into folders" />
   </component>
 </project>
