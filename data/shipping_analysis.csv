@@ -1,0 +1,5 @@
+ship_mode,count,mean,min,max
+First Class,795,2.187421383647799,1,4
+Same Day,266,0.045112781954887216,0,1
+Second Class,982,3.2321792260692463,1,5
+Standard Class,3068,4.994458930899609,3,11
