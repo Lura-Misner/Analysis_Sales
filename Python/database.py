@@ -1,14 +1,15 @@
-import openpyxl
+from config import DB_HOST, DB_USER, DB_PASSWORD, DB_NAME
 import mysql.connector
 from mysql.connector import Error
+import openpyxl
 
 try:
     # Establish a connection to the MySQL server
     connection = mysql.connector.connect(
-        host="localhost",
-        user="root",
-        password="password",
-        database = "StoreAnalysis"
+        host=DB_HOST,
+        user=DB_USER,
+        password=DB_PASSWORD,
+        database=DB_NAME
     )
 
     if connection.is_connected():
@@ -20,7 +21,7 @@ try:
 
         try:
             # Try to create staging tables, handle errors.
-            with open("sql/create_staging.sql", "r") as file:
+            with open("../sql/create_staging.sql", "r") as file:
                 create_staging = file.read()
 
             for statement in create_staging.split(";"):
@@ -30,7 +31,7 @@ try:
             print("Staging Tables created or verified successfully.")
 
             # Clear All Tables
-            with open("sql/clear_normalized_tables.sql", "r") as file:
+            with open("../sql/clear_normalized_tables.sql", "r") as file:
                 clear_normal = file.read()
 
             for statement in clear_normal.split(";"):
@@ -38,7 +39,7 @@ try:
                     cursor.execute(statement)
 
 
-            with open("sql/clear_staging.sql", "r") as file:
+            with open("../sql/clear_staging.sql", "r") as file:
                 clear_staging = file.read()
 
             for statement in clear_staging.split(";"):
@@ -48,7 +49,7 @@ try:
             print("Normalized and Staging Tables cleared successfully.")
 
             # Establish connection to data file
-            workbook = openpyxl.load_workbook("sample_-_superstore.xlsx")
+            workbook = openpyxl.load_workbook("../data/sample_-_superstore.xlsx")
             orders_sheet = workbook["Orders"]
             people_sheet = workbook["People"]
             returns_sheet = workbook["Returns"]
@@ -110,7 +111,7 @@ try:
                   f"ReturnsStaging Table: {returns_count} rows added.")
 
             # Create normalized tables for our database.
-            with open("sql/create_tables.sql", "r") as file:
+            with open("../sql/create_tables.sql", "r") as file:
                 create_tables = file.read()
 
             for statement in create_tables .split(";"):
@@ -120,7 +121,7 @@ try:
             print("Normalized Tables created or verified successfully.")
 
             # Populate Normalized Tables
-            with open("sql/populate_tables.sql", "r") as file:
+            with open("../sql/populate_tables.sql", "r") as file:
                 populate_tables = file.read()
 
             for statement in populate_tables.split(";"):
